@@ -1,6 +1,6 @@
 public class Solution {
   public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-    // Ê¹nums1³ÉÎª½Ï¶ÌÊı×é,²»½ö¿ÉÒÔÌá¸ß¼ìË÷ËÙ¶È,Í¬Ê±¿ÉÒÔ±ÜÃâÒ»Ğ©±ß½çÎÊÌâ
+    // ä½¿nums1æˆä¸ºè¾ƒçŸ­æ•°ç»„,ä¸ä»…å¯ä»¥æé«˜æ£€ç´¢é€Ÿåº¦,åŒæ—¶å¯ä»¥é¿å…ä¸€äº›è¾¹ç•Œé—®é¢˜
     if (nums1.length > nums2.length) {
       int[] temp = nums1;
       nums1 = nums2;
@@ -9,34 +9,34 @@ public class Solution {
 
     int len1 = nums1.length;
     int len2 = nums2.length;
-    int leftLen = (len1 + len2 + 1) / 2; //Á½Êı×éºÏ²¢&ÅÅĞòºó,×ó°ë±ßµÄ³¤¶È
+    int leftLen = (len1 + len2 + 1) / 2; //ä¸¤æ•°ç»„åˆå¹¶&æ’åºå,å·¦åŠè¾¹çš„é•¿åº¦
     
-    // ¶ÔÊı×é1½øĞĞ¶ş·Ö¼ìË÷
+    // å¯¹æ•°ç»„1è¿›è¡ŒäºŒåˆ†æ£€ç´¢
     int start = 0;
     int end = len1;
     while (start <= end) {
-      // Á½¸öÊı×éµÄ±»²âÊıA,BµÄÎ»ÖÃ(´Ó1¿ªÊ¼¼ÆËã)
-      // count1 = 2 ±íÊ¾ num1 Êı×éµÄµÚ2¸öÊı×Ö
-      // ±Èindex´ó1
+      // ä¸¤ä¸ªæ•°ç»„çš„è¢«æµ‹æ•°A,Bçš„ä½ç½®(ä»1å¼€å§‹è®¡ç®—)
+      // count1 = 2 è¡¨ç¤º num1 æ•°ç»„çš„ç¬¬2ä¸ªæ•°å­—
+      // æ¯”indexå¤§1
       int count1 = start + ((end - start) / 2);
       int count2 = leftLen - count1;
       
       if (count1 > 0 && nums1[count1 - 1] > nums2[count2]) {
-        // A±ÈBµÄnext»¹Òª´ó
+        // Aæ¯”Bçš„nextè¿˜è¦å¤§
         end = count1 - 1;
       } else if (count1 < len1 && nums2[count2 - 1] > nums1[count1]) {
-        // B±ÈAµÄnext»¹Òª´ó
+        // Bæ¯”Açš„nextè¿˜è¦å¤§
         start = count1 + 1;
       } else {
-        // »ñÈ¡ÖĞÎ»Êı
-        int result =  (count1 == 0)? nums2[count2 - 1]: // µ±num1Êı×éµÄÊı¶¼ÔÚ×ÜÊı×éÓÒ±ß
-                      (count2 == 0)? nums1[count1 - 1]: // µ±num2Êı×éµÄÊı¶¼ÔÚ×ÜÊı×éÓÒ±ß
-                      Math.max(nums1[count1 - 1], nums2[count2 - 1]); // ±È½ÏA,B
+        // è·å–ä¸­ä½æ•°
+        int result =  (count1 == 0)? nums2[count2 - 1]: // å½“num1æ•°ç»„çš„æ•°éƒ½åœ¨æ€»æ•°ç»„å³è¾¹
+                      (count2 == 0)? nums1[count1 - 1]: // å½“num2æ•°ç»„çš„æ•°éƒ½åœ¨æ€»æ•°ç»„å³è¾¹
+                      Math.max(nums1[count1 - 1], nums2[count2 - 1]); // æ¯”è¾ƒA,B
         if (isOdd(len1 + len2)) {
           return result;
         }
 
-        // ´¦ÀíÅ¼Êı¸öÊıµÄÇé¿ö
+        // å¤„ç†å¶æ•°ä¸ªæ•°çš„æƒ…å†µ
         int nextValue = (count1 == len1) ? nums2[count2]:
                         (count2 == len2) ? nums1[count1]:
                         Math.min(nums1[count1], nums2[count2]);
@@ -44,10 +44,10 @@ public class Solution {
       }
     }
 
-    return Integer.MIN_VALUE; // ¾ø¶Ôµ½²»ÁËÕâÀï
+    return Integer.MIN_VALUE; // ç»å¯¹åˆ°ä¸äº†è¿™é‡Œ
   }
 
-  // ÆæÊı·µ»Øtrue,Å¼Êı·µ»Øfalse
+  // å¥‡æ•°è¿”å›true,å¶æ•°è¿”å›false
   private boolean isOdd(int x) {
     return (x & 1) == 1;
   }
